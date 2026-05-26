@@ -1,0 +1,482 @@
+/* ============================================================
+       VARIÁVEIS DE COR — baseadas nas cores que você escolheu
+       ============================================================ */
+    :root {
+      --pink:         #ffa1c4;   /* rosa principal */
+      --lavender:     #e3e3fd;   /* lavanda claro */
+      --black:        #000000;   /* preto puro */
+      --thistle:      #d8bfd8;   /* lilas suave */
+
+      --bg:           #0c0c11;   /* fundo escuro */
+      --bg2:          #141420;   /* fundo secundário */
+      --glass:        rgba(255, 161, 196, 0.05);
+      --glass-border: rgba(255, 161, 196, 0.13);
+      --text:         #ede5ed;
+      --text-muted:   rgba(216, 191, 216, 0.5);
+      --player-h:     76px;
+      --radius:       16px;
+    }
+
+    /* RESET — zera margens e bordas padrão do navegador */
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* CORPO DA PÁGINA */
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      min-height: 100vh;
+      /* Espaço embaixo para o player não cobrir o conteúdo */
+      padding-bottom: calc(var(--player-h) + 40px);
+      overflow-x: hidden;
+    }
+
+    /* GRADIENTE DE ATMOSFERA no fundo — efeito sutil de luz */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 55% 45% at 12% 10%, rgba(255,161,196,0.08) 0%, transparent 55%),
+        radial-gradient(ellipse 45% 55% at 88% 88%, rgba(227,227,253,0.06) 0%, transparent 55%),
+        radial-gradient(ellipse 60% 30% at 50% 50%, rgba(216,191,216,0.03) 0%, transparent 70%);
+      pointer-events: none; /* não bloqueia cliques */
+      z-index: 0;
+    }
+
+    /* ============================================================
+       CABEÇALHO (fica fixo no topo ao rolar)
+       ============================================================ */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      padding: 22px 20px 0;
+      /* Degrade para esconder suavemente o conteúdo atrás */
+      background: linear-gradient(to bottom, var(--bg) 72%, transparent 100%);
+    }
+
+    /* Título do site */
+    .logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.7rem, 5.5vw, 2.5rem); /* responsivo: muda tamanho conforme tela */
+      font-weight: 600;
+      color: var(--pink);
+      margin-bottom: 4px;
+      line-height: 1;
+      letter-spacing: 0.01em;
+    }
+    .logo em {
+      font-style: italic;
+      color: var(--lavender);
+    }
+
+    /* Subtítulo embaixo do logo */
+    .logo-sub {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-bottom: 18px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    /* ============================================================
+       ABAS DE CATEGORIAS
+       ============================================================ */
+    .tabs {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;      /* scroll horizontal nas abas */
+      padding-bottom: 14px;
+      scrollbar-width: none; /* esconde barra de scroll no Firefox */
+    }
+    .tabs::-webkit-scrollbar { display: none; } /* esconde no Chrome/Safari */
+
+    /* Cada botão de aba */
+    .tab-btn {
+      flex-shrink: 0;           /* não deixa o botão encolher */
+      padding: 7px 18px;
+      border-radius: 999px;     /* borda bem arredondada (pílula) */
+      border: 1.5px solid var(--glass-border);
+      background: transparent;
+      color: var(--text-muted);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 500;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s ease;
+    }
+    .tab-btn:hover {
+      border-color: var(--thistle);
+      color: var(--thistle);
+    }
+    /* Aba selecionada */
+    .tab-btn.active {
+      background: var(--pink);
+      border-color: var(--pink);
+      color: var(--black);
+      font-weight: 600;
+    }
+
+    /* ============================================================
+       ÁREA PRINCIPAL DO CONTEÚDO
+       ============================================================ */
+    main {
+      padding: 8px 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Cada seção de categoria (Taylor Swift, etc.) */
+    .cat-section {
+      margin-top: 28px;
+      display: none; /* começa escondida, JS ativa */
+    }
+    .cat-section.visible {
+      display: block;
+      animation: slidein 0.3s ease; /* animação ao aparecer */
+    }
+    .cat-section + .cat-section { margin-top: 36px; }
+
+    /* Título da categoria (ex: "🌟 Taylor Swift") */
+    .cat-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.1rem, 3.5vw, 1.5rem);
+      font-weight: 600;
+      color: var(--lavender);
+      margin-bottom: 14px;
+      padding-left: 2px;
+    }
+
+    /* ============================================================
+       CARROSSEL HORIZONTAL
+       ============================================================ */
+    .carousel {
+      display: flex;
+      gap: 14px;
+      overflow-x: auto;
+      padding: 4px 2px 14px;
+      scroll-snap-type: x mandatory;       /* snap suave ao rolar */
+      -webkit-overflow-scrolling: touch;   /* scroll fluido no iPhone */
+      scrollbar-width: none;
+    }
+    .carousel::-webkit-scrollbar { display: none; }
+
+    /* ============================================================
+       CARD DE MÚSICA
+       ============================================================ */
+    .card {
+      flex-shrink: 0;
+      /* clamp(mínimo, ideal, máximo) — adapta ao tamanho da tela */
+      width: clamp(138px, 37vw, 172px);
+      scroll-snap-align: start;
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      cursor: pointer;
+      position: relative;
+      /* Transição suave para hover e estado ativo */
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 14px 32px rgba(255,161,196,0.18);
+    }
+    /* Card da música TOCANDO AGORA */
+    .card.active {
+      border-color: var(--pink);
+      box-shadow: 0 0 28px rgba(255,161,196,0.3);
+    }
+
+    /* Área da capa do álbum */
+    .card-cover-wrap {
+      position: relative;
+      aspect-ratio: 1; /* quadrado perfeito */
+      overflow: hidden;
+      background: var(--bg2);
+    }
+
+    /* Imagem da capa */
+    .card-cover {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.35s ease;
+    }
+    /* Zoom suave na capa ao passar o mouse */
+    .card:hover .card-cover,
+    .card.active .card-cover { transform: scale(1.06); }
+
+    /* Camada escura sobre a capa (aparece no hover) */
+    .card-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.65) 0%, transparent 55%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.22s ease;
+    }
+    .card:hover .card-overlay,
+    .card.active .card-overlay { opacity: 1; }
+
+    /* Botão de play circular sobre a capa */
+    .play-ico {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--pink);
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.45);
+      transition: transform 0.15s ease, background 0.15s ease;
+      pointer-events: none; /* clique vai pro card pai */
+    }
+    .card:hover .play-ico { transform: scale(1.08); }
+
+    /* Indicador de equalizador (barrinhas animadas) quando tocando */
+    .eq-bars {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      display: none; /* escondido por padrão */
+      gap: 2.5px;
+      align-items: flex-end;
+      height: 18px;
+      background: rgba(0,0,0,0.55);
+      border-radius: 5px;
+      padding: 3px 5px;
+    }
+    .card.active .eq-bars { display: flex; } /* mostra só no card ativo */
+
+    /* Cada barrinha do equalizador */
+    .eq-bar {
+      width: 3px;
+      border-radius: 2px;
+      background: var(--pink);
+      animation: eqbounce 0.65s ease infinite alternate;
+    }
+    .eq-bar:nth-child(1) { height: 5px;  animation-delay: 0s; }
+    .eq-bar:nth-child(2) { height: 11px; animation-delay: 0.18s; }
+    .eq-bar:nth-child(3) { height: 7px;  animation-delay: 0.08s; }
+    .eq-bar:nth-child(4) { height: 13px; animation-delay: 0.27s; }
+
+    @keyframes eqbounce {
+      from { transform: scaleY(0.3); }
+      to   { transform: scaleY(1); }
+    }
+
+    /* Informações textuais do card */
+    .card-info {
+      padding: 9px 11px 12px;
+    }
+    .card-title {
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--text);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis; /* "..." quando o texto é muito longo */
+    }
+    .card-sub {
+      font-size: 0.71rem;
+      color: var(--text-muted);
+      margin-top: 3px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* ============================================================
+       PLAYER FIXO NA PARTE DE BAIXO DA TELA
+       ============================================================ */
+    #player-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      height: var(--player-h);
+
+      /* Efeito de vidro fosco */
+      background: rgba(12, 12, 17, 0.88);
+      backdrop-filter: blur(30px) saturate(180%);
+      -webkit-backdrop-filter: blur(30px) saturate(180%);
+
+      border-top: 1px solid var(--glass-border);
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 0 18px;
+
+      /* Começa fora da tela e sobe quando uma música é selecionada */
+      transform: translateY(100%);
+      transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    /* Classe adicionada via JS quando há música tocando */
+    #player-bar.show {
+      transform: translateY(0);
+    }
+
+    /* Imagem da capa no player */
+    #pb-cover {
+      width: 50px;
+      height: 50px;
+      border-radius: 10px;
+      object-fit: cover;
+      flex-shrink: 0;
+      border: 1px solid var(--glass-border);
+    }
+
+    /* Título e artista no player */
+    .pb-info {
+      flex: 1;
+      min-width: 0; /* permite que o texto corte com ellipsis */
+    }
+    .pb-title {
+      font-size: 0.86rem;
+      font-weight: 500;
+      color: var(--text);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .pb-artist {
+      font-size: 0.73rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* Barra de progresso — só aparece em telas >= 560px */
+    .pb-progress {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      flex: 1;
+      max-width: 300px;
+    }
+    @media (min-width: 560px) {
+      .pb-progress { display: flex; }
+    }
+
+    /* Trilha da barra de progresso */
+    .pb-track {
+      width: 100%;
+      height: 3px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 2px;
+      cursor: pointer;
+      position: relative;
+    }
+    /* Preenchimento colorido da barra de progresso */
+    .pb-fill {
+      height: 100%;
+      background: linear-gradient(to right, var(--pink), var(--lavender));
+      border-radius: 2px;
+      width: 0%;
+      transition: width 1s linear;
+      pointer-events: none;
+    }
+    /* Tempos atual e total */
+    .pb-times {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.63rem;
+      color: var(--text-muted);
+    }
+
+    /* Botões de controle (prev, play/pause, next) */
+    .pb-controls {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-shrink: 0;
+    }
+    .pb-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--text-muted);
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: color 0.2s, background 0.2s;
+    }
+    .pb-btn:hover {
+      color: var(--text);
+      background: rgba(255,255,255,0.07);
+    }
+    /* Botão de play/pause — maior e colorido */
+    .pb-btn.play {
+      width: 46px;
+      height: 46px;
+      background: var(--pink);
+      color: var(--black);
+    }
+    .pb-btn.play:hover {
+      background: var(--lavender);
+    }
+
+    /* ============================================================
+       PLAYER INVISÍVEL DO YOUTUBE
+       (necessário para a música tocar sem aparecer na tela)
+       ============================================================ */
+    #yt-wrap {
+      position: fixed;
+      width: 1px;
+      height: 1px;
+      bottom: 0;
+      right: 0;
+      opacity: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    /* ============================================================
+       RESPONSIVIDADE — ajusta espaçamentos para telas maiores
+       ============================================================ */
+    @media (min-width: 768px) {
+      header { padding: 30px 40px 0; }
+      main   { padding: 8px 40px; }
+      #player-bar { padding: 0 40px; gap: 20px; }
+      :root { --player-h: 88px; }
+      #pb-cover { width: 58px; height: 58px; }
+    }
+    @media (min-width: 1200px) {
+      header { padding: 36px 80px 0; }
+      main   { padding: 8px 80px; }
+      #player-bar { padding: 0 80px; }
+    }
+
+    /* ============================================================
+       ANIMAÇÕES
+       ============================================================ */
+    @keyframes slidein {
+      from { opacity: 0; transform: translateX(14px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+
+    /* Faz o player "pulsar" suavemente quando ativo */
+    #pb-cover.pulsing {
+      animation: pulse 2.5s ease infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(255,161,196,0); }
+      50%       { box-shadow: 0 0 0 6px rgba(255,161,196,0.2); }
+    }

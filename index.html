@@ -1,0 +1,92 @@
+<!-- Garante que o site funciona bem em celulares -->
+  
+  
+
+  <!-- Fontes do Google - Cormorant (elegante) + DM Sans (legível) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+
+  
+
+
+
+
+  <!-- ============================================================
+       CABEÇALHO com título e abas
+       ============================================================ -->
+  <header>
+    <!-- Título principal — edite o texto entre as tags -->
+    <div class="logo">♡ <em>Playlist</em> Especial</div>
+    <div class="logo-sub">só as melhores, pra você</div>
+    <!-- Abas geradas automaticamente pelo JavaScript -->
+    <div class="tabs" id="tabs-container"></div>
+  </header>
+
+  <!-- ============================================================
+       CONTEÚDO PRINCIPAL — os carrosséis ficam aqui
+       ============================================================ -->
+  <main id="main"></main>
+
+  <!-- ============================================================
+       PLAYER FIXO NO RODAPÉ
+       ============================================================ -->
+  <div id="player-bar">
+    <!-- Capa da música atual -->
+    <img id="pb-cover" src="" alt="capa da música">
+
+    <!-- Nome e artista -->
+    <div class="pb-info">
+      <div class="pb-title"  id="pb-title">Escolha uma música</div>
+      <div class="pb-artist" id="pb-artist">—</div>
+    </div>
+
+    <!-- Barra de progresso (visível em tablets e desktops) -->
+    <div class="pb-progress">
+      <div class="pb-track" id="pb-track">
+        <div class="pb-fill" id="pb-fill"></div>
+      </div>
+      <div class="pb-times">
+        <span id="pb-cur">0:00</span>
+        <span id="pb-dur">0:00</span>
+      </div>
+    </div>
+
+    <!-- Botões de controle -->
+    <div class="pb-controls">
+      <!-- Botão Anterior -->
+      <button class="pb-btn" id="btn-prev" aria-label="Música anterior">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M6 6h2v12H6zm3.5 6 8.5 6V6z"/>
+        </svg>
+      </button>
+
+      <!-- Botão Play/Pause -->
+      <button class="pb-btn play" id="btn-play" aria-label="Play/Pause">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" id="play-icon">
+          <path d="M8 5v14l11-7z"/>
+        </svg>
+      </button>
+
+      <!-- Botão Próxima -->
+      <button class="pb-btn" id="btn-next" aria-label="Próxima música">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M6 18 14.5 12 6 6v12zm10.5-12v12H19V6h-2.5z"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Player do YouTube (invisível — só para reproduzir o áudio) -->
+  <div id="yt-wrap">
+    <div id="yt-player"></div>
+  </div>
+
+
+  <!-- ============================================================
+       JAVASCRIPT — toda a lógica do site está aqui
+       ============================================================ -->
+  
+
+  <!-- Script do YouTube IFrame API (carrega por último para não travar a página) -->
+  <script src="https://www.youtube.com/iframe_api"></script>
