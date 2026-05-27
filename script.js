@@ -44,7 +44,7 @@ const DADOS = [
         artista: 'Guns N Roses',
         album:   'Use Your Illusion',
         src:     'musicas/NR.mp3',
-        capa:    'capas/NR.jpg', 
+        capa:    'capas/NR.jpeg', 
       },
     ]
   },
