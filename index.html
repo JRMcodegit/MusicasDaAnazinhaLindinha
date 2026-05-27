@@ -1,28 +1,26 @@
 <!DOCTYPE html>
-
-<!-- Garante que o site funciona bem em celulares -->
-  
-  
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <!-- META VIEWPORT — essencial para responsividade em celulares -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0c0c11">
+  <title>♡ Playlist Especial</title>
 
   <!-- Fontes do Google - Cormorant (elegante) + DM Sans (legível) -->
-  <link rel="stylesheet" href="style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
-  
-  
-
-
-
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
   <!-- ============================================================
        CABEÇALHO com título e abas
        ============================================================ -->
   <header>
-    <!-- Título principal — edite o texto entre as tags -->
     <div class="logo">♡ <em>Playlist</em> Especial</div>
     <div class="logo-sub">Atendendo o pedido da mocinha loira</div>
-    <!-- Abas geradas automaticamente pelo JavaScript -->
     <div class="tabs" id="tabs-container"></div>
   </header>
 
@@ -57,21 +55,16 @@
 
     <!-- Botões de controle -->
     <div class="pb-controls">
-      <!-- Botão Anterior -->
       <button class="pb-btn" id="btn-prev" aria-label="Música anterior">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
           <path d="M6 6h2v12H6zm3.5 6 8.5 6V6z"/>
         </svg>
       </button>
-
-      <!-- Botão Play/Pause -->
       <button class="pb-btn play" id="btn-play" aria-label="Play/Pause">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" id="play-icon">
           <path d="M8 5v14l11-7z"/>
         </svg>
       </button>
-
-      <!-- Botão Próxima -->
       <button class="pb-btn" id="btn-next" aria-label="Próxima música">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
           <path d="M6 18 14.5 12 6 6v12zm10.5-12v12H19V6h-2.5z"/>
@@ -80,17 +73,12 @@
     </div>
   </div>
 
-  <!-- Player do YouTube (invisível — só para reproduzir o áudio) -->
+  <!-- Player do YouTube (invisível) -->
   <div id="yt-wrap">
     <div id="yt-player"></div>
   </div>
 
-
-  <!-- ============================================================
-       JAVASCRIPT — toda a lógica do site está aqui
-       ============================================================ -->
-  
-
-  <!-- Script do YouTube IFrame API (carrega por último para não travar a página) -->
   <script src="script.js"></script>
   <script src="https://www.youtube.com/iframe_api"></script>
+</body>
+</html>
