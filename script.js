@@ -19,114 +19,96 @@
   const DADOS = [
     /* ── CATEGORIA 1 ──────────────────────────────── */
     {
-      id:   'taylor',
-      nome: '🌟 Taylor Swift',
+      id:   'Guns',
+      nome: '🌹 Guns N Roses 🌹',
       musicas: [
         {
-          titulo:    'Anti-Hero',
-          artista:   'Taylor Swift',
-          album:     'Midnights',
-          youtubeId: 'nfWlot6h_JM'  // ← substitua pelo ID correto do YouTube
+          titulo:    'Welcome To The Jungle',
+          artista:   'Guns N Roses',
+          album:     'Appetite For Destruction',
+          src: 'musicas/WTTJ.mp3'  // ← substitua pelo ID correto do YouTube
         },
         {
-          titulo:    'Cruel Summer',
-          artista:   'Taylor Swift',
-          album:     'Lover',
-          youtubeId: 'ic8j13piAhQ'
+          titulo:    'This I Love',
+          artista:   'Guns N Roses',
+          album:     'Chinese Democracy',
+          src: 'musicas/TIL.mp3'
         },
         {
-          titulo:    'cardigan',
-          artista:   'Taylor Swift',
-          album:     'folklore',
-          youtubeId: 'K-a8s8OLBSE'
+          titulo:    'Dont Cry',
+          artista:   'Guns N Roses',
+          album:     'Use Your Illusion',
+          src: 'musicas/DC.mp3'
         },
         {
-          titulo:    'Blank Space',
-          artista:   'Taylor Swift',
-          album:     '1989',
-          youtubeId: 'e-ORhEE9VVg'
-        },
-        {
-          titulo:    'Love Story (Taylor\'s Version)',
-          artista:   'Taylor Swift',
-          album:     'Fearless (TV)',
-          youtubeId: '8xg3vE8Ie_E'
-        },
-        {
-          titulo:    'Style',
-          artista:   'Taylor Swift',
-          album:     '1989',
-          youtubeId: 'vCadcBR95oU'
+          titulo:    'November Rain',
+          artista:   'Guns N Roses',
+          album:     'Use Your Illusion',
+          src: 'musicas/NR.mp3'
         },
       ]
     },
 
     /* ── CATEGORIA 2 ──────────────────────────────── */
     {
-      id:   'olivia',
-      nome: '🎸 Olivia Rodrigo',
+      id:   'scorpions',
+      nome: '🦂 Scorpions 🦂',
       musicas: [
         {
-          titulo:    'drivers license',
-          artista:   'Olivia Rodrigo',
-          album:     'SOUR',
-          youtubeId: 'ZmDBbnmKpqQ'
+          titulo:    'Wind Of Change',
+          artista:   'Scorpions',
+          album:     'Crazy World',
+          src: 'musicas/WOC.mp3'
         },
         {
-          titulo:    'good 4 u',
-          artista:   'Olivia Rodrigo',
-          album:     'SOUR',
-          youtubeId: 'gNi_6U5Pm_o'
+          titulo:    'Still Loving You',
+          artista:   'Scorpions',
+          album:     'Love At First Sting',
+          src: 'musicas/SLY.mp3'
         },
         {
-          titulo:    'vampire',
-          artista:   'Olivia Rodrigo',
-          album:     'GUTS',
-          youtubeId: 'RlPNh_PBZb4'
+          titulo:    'No One Like You',
+          artista:   'Scorpions',
+          album:     'Blackout',
+          src: 'musicas/NOLY.mp3'
         },
         {
-          titulo:    'deja vu',
-          artista:   'Olivia Rodrigo',
-          album:     'SOUR',
-          youtubeId: 'cii6ruuycQA'
-        },
-        {
-          titulo:    'traitor',
-          artista:   'Olivia Rodrigo',
-          album:     'SOUR',
-          youtubeId: 'dIRopmBL610'
+          titulo:    'Always Somewhere',
+          artista:   'Scorpions',
+          album:     'Lovedrive',
+          src: 'musicas/AS.mp3'
         },
       ]
     },
 
     /* ── CATEGORIA 3 ──────────────────────────────── */
     {
-      id:   'sabrina',
-      nome: '☕ Sabrina Carpenter',
+      id:   'metallica',
+      nome: '🎸 Metallica 🎸',
       musicas: [
         {
-          titulo:    'Espresso',
-          artista:   'Sabrina Carpenter',
-          album:     "Short n' Sweet",
-          youtubeId: 'eVli-tstM5E'
+          titulo:    'Wherever I May Roam',
+          artista:   'Metallica',
+          album:     "The Black Album",
+          src: 'musicas/WIMR.mp3'
         },
         {
-          titulo:    'Please Please Please',
-          artista:   'Sabrina Carpenter',
-          album:     "Short n' Sweet",
-          youtubeId: 'SB3oTJrnPpA'
+          titulo:    'Nothing Else Matters',
+          artista:   'Metallica',
+          album:     "The Black Album",
+          src: 'musicas/NEM.mp3'
         },
         {
-          titulo:    'Taste',
-          artista:   'Sabrina Carpenter',
-          album:     "Short n' Sweet",
-          youtubeId: 'GMCnJCYiHO8'
+          titulo:    'Enter Sandman',
+          artista:   'Metallica',
+          album:     "The Black Album",
+          src: 'musicas/ES.mp3'
         },
         {
-          titulo:    'Bad For Business',
-          artista:   'Sabrina Carpenter',
-          album:     "Short n' Sweet",
-          youtubeId: 'Uh_OFZl-Fqo'
+          titulo:    'For Whom The Bell Tolls',
+          artista:   'Metallica',
+          album:     "Ride the Lightning",
+          src: 'musicas/FWTBT.mp3'
         },
       ]
     },
